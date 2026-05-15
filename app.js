@@ -34,7 +34,7 @@ const translations = {
     signWarn: "Please provide a signature."
   },
   es: {
-    title: "Generador de W-9",
+    title: "Generador de forma W-9",
     subtitle: "Llena, Firma y Envía tu W-9 en Segundos",
     name: "Nombre completo (como aparece en su declaración de impuestos)",
     business: "Nombre del Negocio (si es diferente al anterior)",
@@ -51,7 +51,7 @@ const translations = {
     ein: "Número Empleador (EIN)",
     signature: "Firma", clear: "Borrar",
     download: "Solo Descargar →",
-    generate: "Descargar & Enviar W-9 →",
+    generate: "Descargar & Enviar →",
     downloading: "Generando W-9...",
     generating: "Enviando W-9...",
     langText: "View in English",
