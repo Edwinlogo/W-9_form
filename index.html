@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>W-9 Form Generator</title>
+  <link rel="stylesheet" href="style.css" />
+  <!-- PDF-Lib -->
+  <script src="https://unpkg.com/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
+  <!-- Signature Pad -->
+  <script src="https://cdn.jsdelivr.net/npm/signature_pad@4.1.7/dist/signature_pad.umd.min.js"></script>
+</head>
+
+<body>
+  <div class="container">
+    <header>
+      <div class="header-controls">
+        <!-- Language Toggle: SafeDrive pill style EN | ES -->
+        <button class="lang-btn" id="langBtn" type="button">
+          <span class="lang-opt active" id="langEN">EN</span>
+          <span class="lang-divider"></span>
+          <span class="lang-opt" id="langES">ES</span>
+        </button>
+        <!-- Theme Toggle: SafeDrive circle style with sun/moon SVGs -->
+        <button class="theme-btn" id="themeBtn" type="button">
+          <svg class="icon-sun" viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="5"/>
+            <line x1="12" y1="1" x2="12" y2="3"/>
+            <line x1="12" y1="21" x2="12" y2="23"/>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+            <line x1="1" y1="12" x2="3" y2="12"/>
+            <line x1="21" y1="12" x2="23" y2="12"/>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+          </svg>
+          <svg class="icon-moon" viewBox="0 0 24 24">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+          </svg>
+        </button>
+      </div>
+      <h1 id="t_title">W-9 Form Generator</h1>
+      <p class="subtitle" id="t_subtitle">Securely Fill, Sign and Submit Your W-9 in Seconds</p>
+    </header>
+
+    <div class="glass-panel">
+      <form id="w9Form" class="form-grid">
+
+        <div class="form-group full-width">
+          <label id="t_name">Full Name (as shown on your income tax return)</label>
+          <input type="text" id="name" required placeholder="John Doe" />
+        </div>
+
+        <div class="form-group full-width">
+          <label id="t_business">Business Name (if different from above)</label>
+          <input type="text" id="businessName" placeholder="Acme Corp LLC" />
+        </div>
+
+        <div class="form-group full-width">
+          <label id="t_taxClass">Federal Tax Classification</label>
+          <select id="taxClass" name="taxClass">
+            <option value="individual" id="t_individual">Individual / Sole Proprietor</option>
+            <option value="ccorp" id="t_ccorp">C Corporation</option>
+            <option value="scorp" id="t_scorp">S Corporation</option>
+            <option value="partnership" id="t_partnership">Partnership</option>
+            <option value="trust" id="t_trust">Trust/Estate</option>
+            <option value="llc" id="t_llc">Limited Liability Company</option>
+          </select>
+        </div>
+
+        <div class="form-group" id="llcTypeContainer" style="display:none;">
+          <label id="t_llcType">LLC Tax Classification</label>
+          <select id="llcType">
+            <option value="C">C Corporation (C)</option>
+            <option value="S">S Corporation (S)</option>
+            <option value="P">Partnership (P)</option>
+          </select>
+        </div>
+
+        <div class="form-group full-width">
+          <label id="t_address">Address (Number, Street, and Apt/Suite no.)</label>
+          <input type="text" id="address" required placeholder="123 Main St, Apt 4B" />
+        </div>
+
+        <div class="form-group address-grid">
+          <div class="form-group">
+            <label id="t_city">City</label>
+            <input type="text" id="city" required placeholder="New York" />
+          </div>
+          <div class="form-group">
+            <label id="t_state">State</label>
+            <input type="text" id="state" required placeholder="NY" />
+          </div>
+          <div class="form-group">
+            <label id="t_zip">ZIP Code</label>
+            <input type="text" id="zip" required placeholder="10001" />
+          </div>
+        </div>
+
+        <div class="form-group full-width">
+          <label id="t_tin">Taxpayer Identification Number (TIN)</label>
+          <select id="tinType" name="tinType" style="margin-bottom:0.5rem;">
+            <option value="ssn" id="t_ssn">Social Security Number (SSN)</option>
+            <option value="ein" id="t_ein">Employer Identification Number (EIN)</option>
+          </select>
+          <input type="text" id="tinInput" placeholder="XXX-XX-XXXX" required />
+        </div>
+
+        <div class="form-group full-width" style="margin-top:1rem;">
+          <label id="t_signature">Signature</label>
+          <div class="signature-container" id="sigContainer">
+            <button class="btn-clear" id="btnClear" type="button">Clear</button>
+            <canvas id="sigCanvas"></canvas>
+          </div>
+        </div>
+
+        <div class="form-group full-width btn-row">
+          <button type="button" class="btn-download" id="btnDownload">
+            <span id="t_download">Download Only →</span>
+          </button>
+          <button type="submit" class="btn-submit" id="btnSubmit">
+            <span id="t_generate">Download & Submit W-9 →</span>
+          </button>
+        </div>
+      </form>
+    </div>
+
+    <!-- Status Toast -->
+    <div id="toast" class="toast hidden"></div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+
+</html>
