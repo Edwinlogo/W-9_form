@@ -136,8 +136,31 @@ function updateLang() {
 document.getElementById('taxClass').addEventListener('change', e => {
   llcContainer.style.display = e.target.value === 'llc' ? 'flex' : 'none';
 });
+// ---- Auto-formato de TIN ----
+function formatTIN(val, type) {
+  let clean = val.replace(/\D/g, '');
+  if (type === 'ssn') {
+    if (clean.length > 9) clean = clean.slice(0, 9);
+    if (clean.length > 5) return `${clean.slice(0, 3)}-${clean.slice(3, 5)}-${clean.slice(5)}`;
+    if (clean.length > 3) return `${clean.slice(0, 3)}-${clean.slice(3)}`;
+    return clean;
+  } else { // EIN
+    if (clean.length > 9) clean = clean.slice(0, 9);
+    if (clean.length > 2) return `${clean.slice(0, 2)}-${clean.slice(2)}`;
+    return clean;
+  }
+}
+
+tinInput.addEventListener('input', e => {
+  const type = document.getElementById('tinType').value;
+  tinInput.value = formatTIN(e.target.value, type);
+});
+
 document.getElementById('tinType').addEventListener('change', e => {
-  tinInput.placeholder = e.target.value === 'ssn' ? 'XXX-XX-XXXX' : 'XX-XXXXXXX';
+  const isSsn = e.target.value === 'ssn';
+  tinInput.placeholder = isSsn ? 'XXX-XX-XXXX' : 'XX-XXXXXXX';
+  tinInput.maxLength = isSsn ? 11 : 10;
+  tinInput.value = formatTIN(tinInput.value, e.target.value);
 });
 
 // ============================================================
