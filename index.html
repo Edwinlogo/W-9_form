@@ -49,12 +49,12 @@
 
         <div class="form-group full-width">
           <label id="t_name">Full Name (as shown on your income tax return)</label>
-          <input type="text" id="name" required placeholder="John Doe" />
+          <input type="text" id="name" required placeholder="John Doe" autocomplete="name" />
         </div>
 
         <div class="form-group full-width">
           <label id="t_business">Business Name (if different from above)</label>
-          <input type="text" id="businessName" placeholder="Acme Corp LLC" />
+          <input type="text" id="businessName" placeholder="Acme Corp LLC" autocomplete="organization" />
         </div>
 
         <div class="form-group full-width">
@@ -80,21 +80,21 @@
 
         <div class="form-group full-width">
           <label id="t_address">Address (Number, Street, and Apt/Suite no.)</label>
-          <input type="text" id="address" required placeholder="123 Main St, Apt 4B" />
+          <input type="text" id="address" required placeholder="123 Main St, Apt 4B" autocomplete="street-address" />
         </div>
 
         <div class="form-group address-grid">
           <div class="form-group">
             <label id="t_city">City</label>
-            <input type="text" id="city" required placeholder="New York" />
+            <input type="text" id="city" required placeholder="New York" autocomplete="address-level2" />
           </div>
           <div class="form-group">
             <label id="t_state">State</label>
-            <input type="text" id="state" required placeholder="NY" />
+            <input type="text" id="state" required placeholder="NY" autocomplete="address-level1" />
           </div>
           <div class="form-group">
             <label id="t_zip">ZIP Code</label>
-            <input type="text" id="zip" required placeholder="10001" />
+            <input type="text" id="zip" required placeholder="10001" autocomplete="postal-code" />
           </div>
         </div>
 
